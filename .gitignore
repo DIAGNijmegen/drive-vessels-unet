@@ -2,3 +2,6 @@
 *.png
 *.gif
 *.tif
+
+runs/
+data/
