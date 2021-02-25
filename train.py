@@ -19,8 +19,8 @@ def main():
     monai.config.print_config()
     logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
-    IMAGE_ROOT = "D:/data/DRIVE/training/images"
-    LABEL_ROOT = "D:/data/DRIVE/training/1st_manual"
+    IMAGE_ROOT = "./data/DRIVE/training/images"
+    LABEL_ROOT = "./data/DRIVE/training/1st_manual"
 
     images = glob(os.path.join(IMAGE_ROOT, "*training.tif"))
     labels = glob(os.path.join(LABEL_ROOT, "*manual1.gif"))
