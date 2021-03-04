@@ -21,6 +21,7 @@ COPY --chown=algorithm:algorithm requirements.txt /opt/algorithm/
 RUN python -m pip install --user -rrequirements.txt
 
 COPY --chown=algorithm:algorithm process.py /opt/algorithm/
+COPY --chown=algorithm:algorithm best_metric_model_segmentation2d_dict.pth /opt/algorithm/
 
 ENTRYPOINT python -m process $0 $@
 
@@ -34,7 +35,7 @@ LABEL nl.diagnijmegen.rse.algorithm.hardware.cpu.count=1
 LABEL nl.diagnijmegen.rse.algorithm.hardware.cpu.capabilities=()
 LABEL nl.diagnijmegen.rse.algorithm.hardware.memory=4G
 LABEL nl.diagnijmegen.rse.algorithm.hardware.gpu.count=1
-LABEL nl.diagnijmegen.rse.algorithm.hardware.gpu.cuda_compute_capability=
+LABEL nl.diagnijmegen.rse.algorithm.hardware.gpu.cuda_compute_capability=()
 LABEL nl.diagnijmegen.rse.algorithm.hardware.gpu.memory=4G
 
 

@@ -26,6 +26,8 @@ class Vesselsegmentor(SegmentationAlgorithm):
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+        print("==> Initializing model!")
+
         self.model = monai.networks.nets.UNet(
             dimensions=2,
             in_channels=3,
@@ -35,7 +37,14 @@ class Vesselsegmentor(SegmentationAlgorithm):
             num_res_units=2,
         ).to(self.device)
         self.model.eval()
-        self.model.load_state_dict(torch.load("../best_metric_model_segmentation2d_dict.pth"))
+        self.model.load_state_dict(
+            torch.load(
+                "/opt/algorithm/best_metric_model_segmentation2d_dict.pth",
+                map_location=self.device,
+            )
+        )
+
+        print("==> Weights loaded!")
 
     def predict(self, *, input_image: SimpleITK.Image) -> SimpleITK.Image:
 
@@ -48,6 +57,7 @@ class Vesselsegmentor(SegmentationAlgorithm):
         out = self.model(image).squeeze().data.cpu().numpy()
         out = (expit(out) > 0.99).astype(np.uint8)
         out = SimpleITK.GetImageFromArray(out)
+        print("==> Forward pass done!")
         return out
 
 
