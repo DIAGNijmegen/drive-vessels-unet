@@ -1,5 +1,4 @@
-FROM python:3.7-slim
-
+FROM pytorch/pytorch
 
 
 RUN groupadd -r algorithm && useradd -m --no-log-init -r -g algorithm algorithm
