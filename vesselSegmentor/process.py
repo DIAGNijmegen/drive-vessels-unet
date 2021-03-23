@@ -51,13 +51,22 @@ class Vesselsegmentor(SegmentationAlgorithm):
 
         image = SimpleITK.GetArrayFromImage(input_image)
         image = np.array(image)
+        shape = image.shape
+
+        # Pre-process the image
         image = transform.resize(image, (512, 512), order=3)
         image = image.astype(np.float32) / 255.
         image = image.transpose((2, 0, 1))
         image = torch.from_numpy(image).to(self.device).reshape(1, 3, 512, 512)
+
+        # Do the forward pass
         out = self.model(image).squeeze().data.cpu().numpy()
+
+        # Post-process the image
+        out = transform.resize(out, shape[:-1], order=3)
         out = (expit(out) > 0.99).astype(np.uint8)
         out = SimpleITK.GetImageFromArray(out)
+
         print("==> Forward pass done")
         return out
 
