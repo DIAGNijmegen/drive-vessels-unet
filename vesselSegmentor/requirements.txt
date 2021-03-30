@@ -4,4 +4,3 @@ scikit-learn==0.20.2
 scipy==1.2.1
 monai==0.4.0
 scikit-image==0.18.1
-torch
