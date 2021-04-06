@@ -1,4 +1,4 @@
-# Retinal vessel segmentation on [DRIVE](https://drive.grand-challenge.org/):
+# Retinal vessel segmentation on [DRIVE](https://drive.grand-challenge.org/)
 
 This repository will detail how you can train and deploy a U-Net for retinal vessel segmentation on the [DRIVE](https://drive.grand-challenge.org/) dataset using Docker.
 
