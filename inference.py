@@ -46,7 +46,8 @@ out = model(image).squeeze().data.cpu().numpy()
 
 # Post-process the image
 out = transform.resize(out, shape[:-1], order=3)
-out = (expit(out) > 0.99).astype(np.uint8)
+out = (expit(out) > 0.99)
+out = (out * 255).astype(np.uint8)
 
 # Plot the prediction
 ax[1].imshow(out, cmap="gray")

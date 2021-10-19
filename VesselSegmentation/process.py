@@ -67,7 +67,8 @@ class Vesselsegmentation(SegmentationAlgorithm):
 
         # Post-process the image
         out = transform.resize(out, shape[:-1], order=3)
-        out = ((expit(out) > 0.99) * 255).astype(np.uint8)  # apply the sigmoid filter and binarize the predictions
+        out = (expit(out) > 0.99)  # apply the sigmoid filter and binarize the predictions
+        out = (out * 255).astype(np.uint8)
         out = SimpleITK.GetImageFromArray(out)  # convert numpy array to SimpleITK image for grand-challenge.org
 
         print("==> Forward pass done")
