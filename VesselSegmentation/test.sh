@@ -8,11 +8,14 @@ VOLUME_SUFFIX=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n 1)
 
 docker volume create vesselsegmentation-output-$VOLUME_SUFFIX
 
+# run the forward pass and store the outputs in a temporary Docker volume
 docker run --rm \
+        --gpus=all \
         -v $SCRIPTPATH/test/input/:/input/ \
         -v vesselsegmentation-output-$VOLUME_SUFFIX:/output/ \
         vesselsegmentation
 
+# compare the outputs in the Docker volume with the outputs in ./test/expected_output/
 docker run --rm \
         -v vesselsegmentation-output-$VOLUME_SUFFIX:/output/ \
         -v $SCRIPTPATH/test/expected_output/:/expected_output/ \
@@ -27,9 +30,9 @@ label_filter.Execute(output, expected_output)
 dice_score = label_filter.GetDiceCoefficient()
 
 if dice_score == 1.0:
-    print('Test passed! :>')
+    print('Test passed!')
 else:
-    print('Test failed! :<')
+    print('Test failed!')
 """
 
 docker volume rm vesselsegmentation-output-$VOLUME_SUFFIX
