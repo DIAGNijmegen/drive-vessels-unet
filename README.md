@@ -2,7 +2,7 @@
 
 This repository will detail how you can train and deploy a U-Net for retinal vessel segmentation on the [DRIVE](https://drive.grand-challenge.org/) dataset using Docker.
 
-💡 To use the pre-trained model and wrap it in a Docker container, follow the instructions provided in this [blog](https://grand-challenge.org/blogs/create-an-algorithm/).
+💡 To use the pre-trained model and wrap it in a Docker container, follow the instructions provided in the [documentation](https://grand-challenge.org/documentation/create-your-own-algorithm/) for grand-challenge.org.
 
 ## Requirements (for training)
 
